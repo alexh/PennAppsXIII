@@ -237,12 +237,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 			
 
 			try {
-				//AudioSystem.write(stream, AudioFileFormat.Type.WAVE, new
-					    //  File("/input.wav"));
 				recorder.save(wavFile);
-
-				JOptionPane.showMessageDialog(SwingSoundRecorder.this,
-						"Saved recorded sound to:\n" + saveFilePath);
 
 				buttonPlay.setEnabled(true);
 
