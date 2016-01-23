@@ -1,4 +1,4 @@
-package net.codejava.sound;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

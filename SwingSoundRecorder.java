@@ -1,4 +1,4 @@
-package net.codejava.sound;
+
 
 import java.awt.Cursor;
 import java.awt.FlowLayout;
@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
@@ -43,11 +46,11 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 
 	// Icons used for buttons
 	private ImageIcon iconRecord = new ImageIcon(getClass().getResource(
-			"/net/codejava/sound/images/Record.gif"));
+			"images/Record.gif"));
 	private ImageIcon iconStop = new ImageIcon(getClass().getResource(
-			"/net/codejava/sound/images/Stop.gif"));
+			"images/Stop.gif"));
 	private ImageIcon iconPlay = new ImageIcon(getClass().getResource(
-			"/net/codejava/sound/images/Play.gif"));
+			"images/Play.gif"));
 
 	public SwingSoundRecorder() {
 		super("Swing Sound Recorder");
@@ -221,16 +224,21 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 		fileChooser.setFileFilter(wavFilter);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 
-		int userChoice = fileChooser.showSaveDialog(this);
+		/*int userChoice = fileChooser.showSaveDialog(this);
 		if (userChoice == JFileChooser.APPROVE_OPTION) {
 			saveFilePath = fileChooser.getSelectedFile().getAbsolutePath();
 			if (!saveFilePath.toLowerCase().endsWith(".wav")) {
 				saveFilePath += ".wav";
 			}
+			*/
 
-			File wavFile = new File(saveFilePath);
+			File wavFile = new File("input.wav");
+			wavFile.setWritable(true);
+			
 
 			try {
+				//AudioSystem.write(stream, AudioFileFormat.Type.WAVE, new
+					    //  File("/input.wav"));
 				recorder.save(wavFile);
 
 				JOptionPane.showMessageDialog(SwingSoundRecorder.this,
@@ -245,7 +253,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 				ex.printStackTrace();
 			}
 		}
-	}
+	
 
 	/**
 	 * launch the program
