@@ -1,7 +1,9 @@
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -9,11 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -30,10 +28,13 @@ import javax.swing.filechooser.FileFilter;
  * @author www.codejava.net
  *
  */
-public class SwingSoundRecorder extends JFrame implements ActionListener {
+public class Counselor extends JFrame implements ActionListener {
+	
+	
+	
 	
 
-	private JButton buttonRecord = new JButton("Record");
+	private JButton buttonRecord = new JButton();
 	private JLabel labelRecordTime = new JLabel("Record Time: 00:00:00");
 
 	private SoundRecordingUtil recorder = new SoundRecordingUtil();
@@ -44,28 +45,97 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 	private boolean isRecording = false;
 
 	private String saveFilePath;
+	private String questionText;
+	private String name1;
+	private String name2;
+	private String currentPlayerName;
+	JLabel questionLabel = new JLabel("Hello! Press the microphone and say hello to me");
+	JLabel name1Label = new JLabel(name1);
+	JLabel name2Label = new JLabel(name2);
 
 	// Icons used for buttons
 	private ImageIcon iconRecord = new ImageIcon(getClass().getResource(
-			"images/Record.gif"));
+			"images/microphone.png"));
 	private ImageIcon iconStop = new ImageIcon(getClass().getResource(
-			"images/Stop.gif"));
+			"images/pause.png"));
+	
+	private ImageIcon background = new ImageIcon(getClass().getResource(
+			"images/PennAppsBG.png"));
 
-	public SwingSoundRecorder() {
-		super("Swing Sound Recorder");
-		setLayout(new BorderLayout(5,5));
+	public Counselor(String questionText, String name1, String name2) {
+		super("Counselor");
+		this.setTitle("Marriage Counselor");
+		setLayout(new BorderLayout());
+		this.questionText = questionText;
+		this.name1 = name1;
+		this.name2 = name2;
+		
+		questionLabel.setForeground(Color.WHITE);
+		questionLabel.setFont(new Font("BiauKai", Font.BOLD, 20));
+		
+		setQuestion(questionText);
 
-		buttonRecord.setFont(new Font("Sans", Font.BOLD, 14));
+		JLabel contentPane = new JLabel();
+		contentPane.setIcon( background );
+		contentPane.setLayout( new BorderLayout() );
+		this.setContentPane( contentPane );
+
+		buttonRecord.setFont(new Font("BiauKai", Font.BOLD, 14));
 		buttonRecord.setIcon(iconRecord);
-		labelRecordTime.setFont(new Font("Sans", Font.BOLD, 12));
+		buttonRecord.setOpaque(false);
+		buttonRecord.setContentAreaFilled(false);
+		buttonRecord.setBorderPainted(false);
+		labelRecordTime.setFont(new Font("BiauKais", Font.BOLD, 12));
+		labelRecordTime.setForeground(Color.WHITE);
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout(new BorderLayout());
+		centerPanel.setOpaque(false);
+		add(centerPanel, BorderLayout.SOUTH);
 		JPanel controls = new JPanel();
 		controls.setLayout(new FlowLayout());
-		JLabel test = new  JLabel("Test Test Test");
+		JLabel rightbuffer = new  JLabel();
+		rightbuffer.setPreferredSize(new Dimension(450,200));
+		centerPanel.add(rightbuffer, BorderLayout.EAST);
+		
+		JLabel leftbuffer = new  JLabel();
+		leftbuffer.setPreferredSize(new Dimension(450,200));
+		centerPanel.add(leftbuffer, BorderLayout.WEST);
+		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BorderLayout());
+		bottomPanel.setOpaque(false);
+		JLabel test1 = new JLabel();
+		labelRecordTime.setPreferredSize(new Dimension(300,250));
+		JPanel bcPanel = new JPanel();
+		bcPanel.setOpaque(false);
+		bcPanel.add(labelRecordTime);
+		bottomPanel.add(bcPanel, BorderLayout.CENTER);
+		name1Label = new JLabel(name1);
+		 name2Label = new JLabel(name2);
+		name1Label.setFont(new Font("BiauKai", Font.BOLD, 75));
+		name2Label.setFont(new Font("BiauKai", Font.BOLD, 75));
+		name1Label.setForeground(Color.GRAY);
+		name2Label.setForeground(Color.GRAY);
+		if(currentPlayerName == name1){
+		name1Label.setForeground(Color.WHITE);
+		}
+		if(currentPlayerName == name2){
+			name2Label.setForeground(Color.WHITE);
+			}
+		bottomPanel.add(name1Label, BorderLayout.WEST);
+		bottomPanel.add(name2Label, BorderLayout.EAST);
+		centerPanel.add(bottomPanel, BorderLayout.SOUTH);
+		
+		JPanel topPanel = new JPanel();
+		topPanel.setPreferredSize(new Dimension(1200,200));
+		topPanel.setOpaque(false);
+		centerPanel.add(topPanel, BorderLayout.NORTH);
+		topPanel.add(questionLabel, BorderLayout.CENTER);
+	
 
-		controls.add(buttonRecord);
-		controls.add(labelRecordTime);
-		add(controls, BorderLayout.PAGE_START);
-		add(test, BorderLayout.CENTER);
+		
+
+		centerPanel.add(buttonRecord, BorderLayout.CENTER);
 
 		buttonRecord.addActionListener(this);
 
@@ -85,6 +155,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 				startRecording();
 			} else {
 				stopRecording();
+				setQuestion("Fetch New Question");
 			}
 
 			}
@@ -100,13 +171,12 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					isRecording = true;
-					buttonRecord.setText("Stop");
 					buttonRecord.setIcon(iconStop);
 
 					recorder.start();
 
 				} catch (LineUnavailableException ex) {
-					JOptionPane.showMessageDialog(SwingSoundRecorder.this,
+					JOptionPane.showMessageDialog(Counselor.this,
 							"Error", "Could not start recording sound!",
 							JOptionPane.ERROR_MESSAGE);
 					ex.printStackTrace();
@@ -125,7 +195,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 		isRecording = false;
 		try {
 			timer.cancel();
-			buttonRecord.setText("Record");
 			buttonRecord.setIcon(iconRecord);
 			
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -137,7 +206,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 			saveFile();
 
 		} catch (IOException ex) {
-			JOptionPane.showMessageDialog(SwingSoundRecorder.this, "Error",
+			JOptionPane.showMessageDialog(Counselor.this, "Error",
 					"Error stopping sound recording!",
 					JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
@@ -190,30 +259,31 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 
 
 			} catch (IOException ex) {
-				JOptionPane.showMessageDialog(SwingSoundRecorder.this, "Error",
+				JOptionPane.showMessageDialog(Counselor.this, "Error",
 						"Error saving to sound file!",
 						JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
 		}
 	
-
-	/**
-	 * launch the program
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception ex) {
-			ex.printStackTrace();
+	public void setQuestion(String q){
+		if (currentPlayerName == name1 || currentPlayerName == null){
+			currentPlayerName = name2;
+			name2Label.setForeground(Color.WHITE);
+			name1Label.setForeground(Color.GRAY);
+		} else{
+			currentPlayerName = name1;
+			name1Label.setForeground(Color.WHITE);
+			name2Label.setForeground(Color.GRAY);
 		}
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new SwingSoundRecorder().setVisible(true);
-			}
-		});
+		
+		questionLabel.setText(currentPlayerName + ", " +q);
+		
 	}
+	
+
+	
+	
+	
 
 }
