@@ -281,6 +281,10 @@ public class Counselor extends JFrame implements ActionListener {
 		
 	}
 	
+	public String textToSpeech(){
+		return HoundInputText.doInput("input.wav");
+	}
+	
 
 	
 	
