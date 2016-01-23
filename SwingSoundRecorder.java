@@ -34,7 +34,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 	
 
 	private JButton buttonRecord = new JButton("Record");
-	private JButton buttonPlay = new JButton("Play");
 	private JLabel labelRecordTime = new JLabel("Record Time: 00:00:00");
 
 	private SoundRecordingUtil recorder = new SoundRecordingUtil();
@@ -43,7 +42,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 	private RecordTimer timer;
 
 	private boolean isRecording = false;
-	private boolean isPlaying = false;
 
 	private String saveFilePath;
 
@@ -52,8 +50,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 			"images/Record.gif"));
 	private ImageIcon iconStop = new ImageIcon(getClass().getResource(
 			"images/Stop.gif"));
-	private ImageIcon iconPlay = new ImageIcon(getClass().getResource(
-			"images/Play.gif"));
 
 	public SwingSoundRecorder() {
 		super("Swing Sound Recorder");
@@ -61,9 +57,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 
 		buttonRecord.setFont(new Font("Sans", Font.BOLD, 14));
 		buttonRecord.setIcon(iconRecord);
-		buttonPlay.setFont(new Font("Sans", Font.BOLD, 14));
-		buttonPlay.setIcon(iconPlay);
-		buttonPlay.setEnabled(false);
 		labelRecordTime.setFont(new Font("Sans", Font.BOLD, 12));
 		JPanel controls = new JPanel();
 		controls.setLayout(new FlowLayout());
@@ -71,12 +64,10 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 
 		controls.add(buttonRecord);
 		controls.add(labelRecordTime);
-		controls.add(buttonPlay);
 		add(controls, BorderLayout.PAGE_START);
 		add(test, BorderLayout.CENTER);
 
 		buttonRecord.addActionListener(this);
-		buttonPlay.addActionListener(this);
 
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,14 +87,9 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 				stopRecording();
 			}
 
-		} else if (button == buttonPlay) {
-			if (!isPlaying) {
-				playBack();
-			} else {
-				stopPlaying();
 			}
 		}
-	}
+
 
 	/**
 	 * Start recording sound, the time will count up.
@@ -116,7 +102,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 					isRecording = true;
 					buttonRecord.setText("Stop");
 					buttonRecord.setIcon(iconStop);
-					buttonPlay.setEnabled(false);
 
 					recorder.start();
 
@@ -162,51 +147,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 	/**
 	 * Start playing back the sound.
 	 */
-	private void playBack() {
-		timer = new RecordTimer(labelRecordTime);
-		timer.start();
-		isPlaying = true;
-		playbackThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-
-					buttonPlay.setText("Stop");
-					buttonPlay.setIcon(iconStop);
-					buttonRecord.setEnabled(false);
-
-					player.play(saveFilePath);
-					timer.reset();
-
-					buttonPlay.setText("Play");
-					buttonRecord.setEnabled(true);
-					buttonPlay.setIcon(iconPlay);
-					isPlaying = false;
-
-				} catch (UnsupportedAudioFileException ex) {
-					ex.printStackTrace();
-				} catch (LineUnavailableException ex) {
-					ex.printStackTrace();
-				} catch (IOException ex) {
-					ex.printStackTrace();
-				}
-
-			}
-		});
-
-		playbackThread.start();
-	}
-
-	/**
-	 * Stop playing back.
-	 */
-	private void stopPlaying() {
-		timer.reset();
-		timer.interrupt();
-		player.stop();
-		playbackThread.interrupt();
-	}
+	
 
 	/**
 	 * Save the recorded sound into a WAV file.
@@ -247,7 +188,6 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 			try {
 				recorder.save(wavFile);
 
-				buttonPlay.setEnabled(true);
 
 			} catch (IOException ex) {
 				JOptionPane.showMessageDialog(SwingSoundRecorder.this, "Error",
