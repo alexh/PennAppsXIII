@@ -1,5 +1,6 @@
 
 
+import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,6 +20,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
@@ -29,6 +31,7 @@ import javax.swing.filechooser.FileFilter;
  *
  */
 public class SwingSoundRecorder extends JFrame implements ActionListener {
+	
 
 	private JButton buttonRecord = new JButton("Record");
 	private JButton buttonPlay = new JButton("Play");
@@ -54,7 +57,7 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 
 	public SwingSoundRecorder() {
 		super("Swing Sound Recorder");
-		setLayout(new FlowLayout());
+		setLayout(new BorderLayout(5,5));
 
 		buttonRecord.setFont(new Font("Sans", Font.BOLD, 14));
 		buttonRecord.setIcon(iconRecord);
@@ -62,10 +65,15 @@ public class SwingSoundRecorder extends JFrame implements ActionListener {
 		buttonPlay.setIcon(iconPlay);
 		buttonPlay.setEnabled(false);
 		labelRecordTime.setFont(new Font("Sans", Font.BOLD, 12));
+		JPanel controls = new JPanel();
+		controls.setLayout(new FlowLayout());
+		JLabel test = new  JLabel("Test Test Test");
 
-		add(buttonRecord);
-		add(labelRecordTime);
-		add(buttonPlay);
+		controls.add(buttonRecord);
+		controls.add(labelRecordTime);
+		controls.add(buttonPlay);
+		add(controls, BorderLayout.PAGE_START);
+		add(test, BorderLayout.CENTER);
 
 		buttonRecord.addActionListener(this);
 		buttonPlay.addActionListener(this);

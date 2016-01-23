@@ -20,7 +20,7 @@ import com.Hound.SampleHoundDriver.*;
 public class HoundInputText {
 
 
-		public static String doInput(){
+		public static String doInput(String filename){
 			
 
 			String client_id = "IoKIZFhiSvBqqmXhUCewfQ==";
@@ -49,7 +49,7 @@ public class HoundInputText {
 			String transcription = null;
 			try {
 				request = requester.start_voice_request(state, reqInfo, partial_handler);
-				File file = new File("input.wav");
+				File file = new File(filename);
 				InputStream fis = new FileInputStream(file);
 				byte[] buffer = new byte[(int)file.length()];
 				fis.read(buffer, 0, buffer.length);
