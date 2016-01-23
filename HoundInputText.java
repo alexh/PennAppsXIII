@@ -20,11 +20,11 @@ import com.Hound.SampleHoundDriver.*;
 public class HoundInputText {
 
 
-		public static String doInputQuestion(){
+		public static String doInput(){
 			
 
-			String client_id = "qWlZIExLdNX8ZZ3fNnETRA==";
-			String client_key = "ejLuAGykuBqu0WxWpYjVeycfmALfdB3IiBV14x9leF9BSBBvt_X0bC6uSu6oEu28XVZrWI2YJc2ml8HqCC979Q==";
+			String client_id = "IoKIZFhiSvBqqmXhUCewfQ==";
+			String client_key = "tGqZ6J-hl6WsVYidLIdazQPWmIkKN5gvWjCCcc7Lk9HYBiLrAZosmAbzDZCe6jdYVQIhCEPI0trlyZspV0WXew==";
 			String user_id = "alex";
 			/*
 			 * String text_request_url_base = ((arguments.length >= 4) ?

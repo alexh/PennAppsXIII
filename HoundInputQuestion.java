@@ -20,7 +20,7 @@ import com.Hound.SampleHoundDriver.*;
 public class HoundInputQuestion {
 
 
-		public static String doInputQuestion(){
+		public static String doInput(){
 			
 
 			String client_id = "qWlZIExLdNX8ZZ3fNnETRA==";
