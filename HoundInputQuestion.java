@@ -1,9 +1,11 @@
 
 	import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Vector;
 
 import com.Hound.HoundJSON.CommandResultJSON;
@@ -15,10 +17,10 @@ import com.Hound.HoundRequester.HoundRequester.PartialHandler;
 import com.Hound.HoundRequester.HoundRequester.VoiceRequest;
 import com.Hound.SampleHoundDriver.*;
 	
-public class HoundInput {
+public class HoundInputQuestion {
 
 
-		public static String doInput(){
+		public static String doInputQuestion(){
 			
 
 			String client_id = "qWlZIExLdNX8ZZ3fNnETRA==";
@@ -47,16 +49,12 @@ public class HoundInput {
 			String transcription = null;
 			try {
 				request = requester.start_voice_request(state, reqInfo, partial_handler);
-				in = new BufferedInputStream(new FileInputStream("input.wav"));
-				int read;
-				byte[] buff = new byte[1024];
-				while ((read = in.read(buff)) > 0)
-				{
-				    out.write(buff, 0, read);
-				}
-				out.flush();
-				byte[] audioBytes = out.toByteArray();
-				request.add_audio(1024, audioBytes);
+				File file = new File("input.wav");
+				InputStream fis = new FileInputStream(file);
+				byte[] buffer = new byte[(int)file.length()];
+				fis.read(buffer, 0, buffer.length);
+				fis.close();
+				request.add_audio(buffer.length, buffer);
 				HoundServerJSON done = request.finish();
 				Vector<CommandResultJSON> results = done.getAllResults();
 				transcription = results.get(0).getWrittenResponseLong();
@@ -71,9 +69,6 @@ public class HoundInput {
 			}
 			return transcription;
 
-			
-
-			}
 		}
-
+}
 
