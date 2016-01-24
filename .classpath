@@ -4,5 +4,7 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="HoundifyJavaSDK.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/alexhaynes32/Documents/PennApps/PennAppsXIII/java-sdk-2.7.0-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/alexhaynes32/Documents/PennApps/PennAppsXIII/json-20151123.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/alexhaynes32/Documents/PennApps/PennAppsXIII/stanford-postagger-3.5.2.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

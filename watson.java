@@ -22,7 +22,7 @@ import com.ibm.watson.developer_cloud.relationship_extraction.v1.model.Dataset;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 
-public class main {
+public class watson {
 	
 
 	public static void main(String[] args) {
