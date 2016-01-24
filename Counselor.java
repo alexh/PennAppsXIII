@@ -211,6 +211,8 @@ public class Counselor extends JFrame implements ActionListener {
 					JOptionPane.ERROR_MESSAGE);
 			ex.printStackTrace();
 		}
+		
+		
 	}
 
 	/**
@@ -281,6 +283,12 @@ public class Counselor extends JFrame implements ActionListener {
 		
 	}
 	
+	public void analyze(){
+		//send to tristrum's code textToSpeech();
+		//open results pop up
+		//set next question
+		new ResultsPopUp().setVisible(true);
+	}
 	public String textToSpeech(){
 		return HoundInputText.doInput("input.wav");
 	}

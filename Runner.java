@@ -14,6 +14,7 @@ public class Runner {
 			public void run() {
 				Counselor c = new Counselor("First Question", "Tristrum", "Alex");
 				c.setVisible(true);
+				c.analyze();
 			}
 		});
 	}
