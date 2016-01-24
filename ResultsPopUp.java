@@ -108,7 +108,6 @@ public class ResultsPopUp extends JFrame {
 	}
 	
 	public String getNextQuestion(){
-		System.out.println(topNoun);
 		String[] questions = {"Have you ever considered having an affair?", 
 				"What Issues Do You Think Are Affecting Our Marriage the Most?", 
 				"Are We Going Through a Bad Phase?", 
