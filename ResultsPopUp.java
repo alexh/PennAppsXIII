@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,7 +13,7 @@ public class ResultsPopUp extends JFrame{
 			"images/AnalysisBG.png"));
 	
 	
-	public ResultsPopUp(){
+	public ResultsPopUp(String transcript, String PrevQ){
 		super("Results");
 		this.setTitle("Question Results");
 		setLayout(new BorderLayout());
@@ -21,8 +22,9 @@ public class ResultsPopUp extends JFrame{
 		contentPane.setIcon( background );
 		contentPane.setLayout( new BorderLayout() );
 		this.setContentPane( contentPane );
-		
-		this.setVisible(true);
+		this.setPreferredSize(new Dimension(1000,700));
+		this.setMinimumSize(new Dimension(1000, 700));
+		this.setMaximumSize(new Dimension(1000, 700));
 	}
 	
 	

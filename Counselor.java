@@ -70,6 +70,10 @@ public class Counselor extends JFrame implements ActionListener {
 		this.name1 = name1;
 		this.name2 = name2;
 		
+		
+		this.setPreferredSize(new Dimension(1200,800));
+		this.setMinimumSize(new Dimension(1200, 800));
+		this.setMaximumSize(new Dimension(1200, 800));
 		questionLabel.setForeground(Color.WHITE);
 		questionLabel.setFont(new Font("BiauKai", Font.BOLD, 20));
 		
@@ -284,10 +288,12 @@ public class Counselor extends JFrame implements ActionListener {
 	}
 	
 	public void analyze(){
+		String transcript = textToSpeech();
+		String prevQ = questionText;
 		//send to tristrum's code textToSpeech();
 		//open results pop up
 		//set next question
-		new ResultsPopUp().setVisible(true);
+		new ResultsPopUp(transcript, prevQ).setVisible(true);
 	}
 	public String textToSpeech(){
 		return HoundInputText.doInput("input.wav");
