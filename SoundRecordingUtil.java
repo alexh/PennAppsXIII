@@ -31,9 +31,9 @@ public class SoundRecordingUtil {
 	 * Defines a default audio format used to record
 	 */
 	AudioFormat getAudioFormat() {
-		float sampleRate = 44100;
+		float sampleRate = 16000;
 		int sampleSizeInBits = 16;
-		int channels = 2;
+		int channels = 1;
 		boolean signed = true;
 		boolean bigEndian = true;
 		return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed,

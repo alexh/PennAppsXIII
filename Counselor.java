@@ -8,9 +8,22 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterInputStream;
+import java.util.zip.DeflaterOutputStream;
 
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -69,6 +82,33 @@ public class Counselor extends JFrame implements ActionListener {
 		this.questionText = questionText;
 		this.name1 = name1;
 		this.name2 = name2;
+		
+		this.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		       System.out.println("Thank you for using!");
+		       
+			try {
+				PrintWriter writer = new PrintWriter(new File("name1.txt"));
+				  writer.print("");
+			       writer.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		     
+			try {
+				PrintWriter writer1 = new PrintWriter(new File("name2.txt"));
+				writer1.print("");
+			       writer1.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		       
+		        }
+		    });
+		
 		
 		
 		this.setPreferredSize(new Dimension(1200,800));
@@ -262,14 +302,20 @@ public class Counselor extends JFrame implements ActionListener {
 
 			try {
 				recorder.save(wavFile);
-
-
-			} catch (IOException ex) {
+				//InputStream is = new FileInputStream("input.wav");
+				//Deflater def = new Deflater(Deflater.BEST_COMPRESSION);
+				//DeflaterInputStream dis = new DeflaterInputStream(is, def);
+				//final Path destination = Paths.get("input.wav");
+				  //  Files.copy(dis, destination);
+				}
+			 catch (IOException ex) {
 				JOptionPane.showMessageDialog(Counselor.this, "Error",
 						"Error saving to sound file!",
 						JOptionPane.ERROR_MESSAGE);
 				ex.printStackTrace();
 			}
+			
+			analyze();
 		}
 	
 	public void setQuestion(String q){
@@ -289,19 +335,33 @@ public class Counselor extends JFrame implements ActionListener {
 	
 	public void analyze(){
 		String transcript = textToSpeech();
+		int currentPlayer;
+		if (currentPlayerName == name1){
+			currentPlayer = 1;
+		} else{
+			currentPlayer = 2;
+		}
+		
+		try {
+		    Files.write(Paths.get("name" + currentPlayer + ".txt"), transcript.getBytes(), StandardOpenOption.APPEND);
+		}catch (IOException e) {
+		    //exception handling left as an exercise for the reader
+		}
+		
 		String prevQ = questionText;
-		//send to tristrum's code textToSpeech();
+		//send to tristrum's code transcript
 		//open results pop up
 		//set next question
 		new ResultsPopUp(transcript, prevQ).setVisible(true);
+		
 	}
+	
 	public String textToSpeech(){
 		return HoundInputText.doInput("input.wav");
 	}
 	
-
 	
 	
 	
-
+	
 }
