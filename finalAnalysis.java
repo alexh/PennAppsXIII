@@ -8,7 +8,7 @@ import com.ibm.watson.developer_cloud.personality_insights.v2.PersonalityInsight
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 
 //
-public class finalAnalysis {
+public class FinalAnalysis {
 	String[] traits;
 	double[] traits_score;
 	String[] needs;
@@ -39,7 +39,7 @@ public class finalAnalysis {
 	public void setNeeds_score(double[] needs_score) {
 		this.needs_score = needs_score;
 	}
-	public finalAnalysis(String arg) {
+	public FinalAnalysis(String arg) {
 		
 		// The name of the file to open.
         String fileName = arg;
@@ -79,6 +79,7 @@ public class finalAnalysis {
         PersonalityInsights best = new PersonalityInsights();
 		best.setUsernameAndPassword("5a439a6e-558c-4547-ba98-965208fa42f9", "xnWd1m6gIHJe");
 		String text = (fixed);
+		if (text != "" && text != null){
 		Profile profile = best.getProfile(text);
 		
 		JSONObject full = new JSONObject(profile);
@@ -181,13 +182,7 @@ public class finalAnalysis {
 		setNeeds(topNeeds);
 		setNeeds_score(highScore);
 		
-		
-		
-		
-	}
-	public static void main(String[] args) {
-		
-		finalAnalysis test = new finalAnalysis("women.txt");
+		}
 		
 		
 	}

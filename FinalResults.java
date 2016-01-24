@@ -15,9 +15,9 @@ public class FinalResults extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ImageIcon background = new ImageIcon(getClass().getResource("man.jpg"));
+	private ImageIcon background = new ImageIcon(getClass().getResource("images/AnalysisBG.png"));
 
-	public FinalResults(String[] args, double[] argu, String[] rags, double[] ragu) {
+	public FinalResults(String text1, String text2, String name1, String name2) {
 		super("Results");
 		this.setTitle("Final Results");
 		RelativeLayout r = new RelativeLayout(RelativeLayout.Y_AXIS);
@@ -48,7 +48,17 @@ public class FinalResults extends JFrame {
 		
 		//Example Item
 		
-		JLabel keywords = new JLabel("Top Keywords In Response:");
+		FinalAnalysis dude1 = new FinalAnalysis(text1);
+		String[] args = dude1.needs;
+		double[] argu = dude1.needs_score;
+		
+		
+		FinalAnalysis dude2 = new FinalAnalysis(text2);
+		String[] rags = dude2.needs;
+		double[] ragu = dude2.needs_score;
+		
+		
+		JLabel keywords = new JLabel(name1 + "needs...");
 		keywords.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		keywords.setForeground(Color.WHITE);
 		JLabel answer1 = new JLabel(args[0] + ": " + argu[0]);
@@ -61,7 +71,7 @@ public class FinalResults extends JFrame {
 		answer3.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer3.setForeground(Color.WHITE);
 		
-		JLabel keywords2 = new JLabel("Top Keywords In Response:");
+		JLabel keywords2 = new JLabel(name2 + "needs...");
 		keywords2.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		keywords2.setForeground(Color.WHITE);
 		JLabel answer4 = new JLabel(rags[0] + ": " + ragu[0]);
@@ -102,22 +112,6 @@ public class FinalResults extends JFrame {
 		//use person1.add() and person2.add()
 
 	}
-	public static void main(String[] args) {
-		
-		FinalAnalysis man = new FinalAnalysis("man.txt");
-		FinalAnalysis women = new FinalAnalysis("women.txt");
-		
-		String[] thiss = man.needs;
 
-		double[] thatt = man.needs_score;
-		
-		String[] those = women.needs;
-
-		double[] these = women.needs_score;
-	
-		
-		FinalResults test = new FinalResults(thiss, thatt, those, these);
-		test.setVisible(true);
-	}
 
 }

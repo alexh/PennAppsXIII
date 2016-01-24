@@ -153,10 +153,8 @@ public class Counselor extends JFrame implements ActionListener {
 		checkResults.addActionListener(new ActionListener(){
 	           @Override
 	           public void actionPerformed(ActionEvent event){
-	        	   FinalAnalysis fa1 = new FinalAnalysis("name1.txt");
-	        	   FinalAnalysis fa2 = new FinalAnalysis("name2.txt");
-	               //FinalResults fr = new FinalResults();
-	            //   fr.setVisible(true);
+	               FinalResults fr = new FinalResults("name1.txt", "name2.txt", name1, name2);
+	               fr.setVisible(true);
 	           }
 	        });
 		labelRecordTime.setFont(new Font("BiauKais", Font.BOLD, 14));
