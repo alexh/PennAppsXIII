@@ -12,7 +12,7 @@ public class Runner {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				Counselor c = new Counselor("First Question", "Tristrum", "Alex");
+				Counselor c = new Counselor("First Question");
 				c.setVisible(true);
 			}
 		});

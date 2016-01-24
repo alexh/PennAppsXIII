@@ -25,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -65,13 +66,44 @@ public class Counselor extends JFrame implements ActionListener {
 	private ImageIcon iconLoading = new ImageIcon(getClass().getResource(
 			"images/loading.gif"));
 
-	public Counselor(String questionText, String name1, String name2) {
+	public Counselor(String questionText) {
 		super("Counselor");
 		this.setTitle("Marriage Counselor");
+		String[] options = { "OK" };
+        JPanel panel = new JPanel();
+        JLabel lbl = new JLabel("First partner, please enter your name: ");
+        JLabel lbl2 = new JLabel("Second partner, please enter your name: ");
+        JTextField txt1 = new JTextField(15);
+        JTextField txt2 = new JTextField(15);
+        panel.add(lbl);
+        panel.add(txt1);
+        int selectedOption = JOptionPane.showOptionDialog(null, panel, "Enter Name",
+                JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+        while (!this.isAlpha(txt1.getText())) {
+            selectedOption = JOptionPane.showOptionDialog(null, panel, "Enter Name",
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        }
+        if (selectedOption == 0 && this.isAlpha(txt1.getText())) {
+            name1 = txt1.getText();
+        }
+
+        panel.remove(lbl);
+        panel.add(lbl2);
+        panel.remove(txt1);
+        panel.add(txt2);
+
+        selectedOption = JOptionPane.showOptionDialog(null, panel, "Enter Name",
+                JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        while (!this.isAlpha(txt2.getText())) {
+            selectedOption = JOptionPane.showOptionDialog(null, panel, "Enter Name",
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        }
+        if (selectedOption == 0 && this.isAlpha(txt2.getText())) {
+            name2 = txt2.getText();
+        }
 		setLayout(new BorderLayout());
 		this.questionText = questionText;
-		this.name1 = name1;
-		this.name2 = name2;
 		
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
@@ -176,6 +208,8 @@ public class Counselor extends JFrame implements ActionListener {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		
+		
 	}
 
 	/**
@@ -309,7 +343,7 @@ public class Counselor extends JFrame implements ActionListener {
 		}
 	
 	public void setQuestion(String q){
-		if (currentPlayerName == name1 || currentPlayerName == null){
+		if (currentPlayerName == name1){
 			currentPlayerName = name2;
 			name2Label.setForeground(Color.WHITE);
 			name1Label.setForeground(Color.GRAY);
@@ -351,6 +385,18 @@ public class Counselor extends JFrame implements ActionListener {
 	
 	public String textToSpeech(){
 		return HoundInputText.doInput("input.wav");
+	}
+	
+	public boolean isAlpha(String name) {
+	    char[] chars = name.toCharArray();
+
+	    for (char c : chars) {
+	        if(!Character.isLetter(c)) {
+	            return false;
+	        }
+	    }
+
+	    return true;
 	}
 	
 	
