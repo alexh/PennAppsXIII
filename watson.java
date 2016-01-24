@@ -14,15 +14,11 @@ import com.ibm.watson.developer_cloud.alchemy.v1.model.Keywords;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 
-<<<<<<< HEAD
-public class watson {
+public class Watson {
 	
-=======
-public class main {
 	String[] keyword;
 	double[] importance;
 	double value;
->>>>>>> origin/master
 	
 	
 	public String[] getKeyword() {
@@ -67,7 +63,7 @@ public class main {
 
 
 
-	public main(String input) {
+	public Watson(String input) {
 		AlchemyLanguage service = new AlchemyLanguage();
 		service.setApiKey("96887abb2b35315e4abe39b894ba91c10c846961");
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -103,10 +99,6 @@ public class main {
 		setImportance(a);
 		setValue(score);
 		
-		
-	}
-	public static void main(String[] args) {
-		main sick = new main("Fuck the police");
 		
 	}
 }

@@ -8,22 +8,15 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.zip.Deflater;
-import java.util.zip.DeflaterInputStream;
-import java.util.zip.DeflaterOutputStream;
 
-import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,8 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -51,13 +42,10 @@ public class Counselor extends JFrame implements ActionListener {
 	private JLabel labelRecordTime = new JLabel("Record Time: 00:00:00");
 
 	private SoundRecordingUtil recorder = new SoundRecordingUtil();
-	private AudioPlayer player = new AudioPlayer();
-	private Thread playbackThread;
 	private RecordTimer timer;
 
 	private boolean isRecording = false;
 
-	private String saveFilePath;
 	private String questionText;
 	private String name1;
 	private String name2;
@@ -74,6 +62,8 @@ public class Counselor extends JFrame implements ActionListener {
 	
 	private ImageIcon background = new ImageIcon(getClass().getResource(
 			"images/PennAppsBG.png"));
+	private ImageIcon iconLoading = new ImageIcon(getClass().getResource(
+			"images/loading.gif"));
 
 	public Counselor(String questionText, String name1, String name2) {
 		super("Counselor");
@@ -349,10 +339,13 @@ public class Counselor extends JFrame implements ActionListener {
 		}
 		
 		String prevQ = questionText;
-		//send to tristrum's code transcript
+		Watson w = new Watson(transcript);
+		double value = w.getValue();
+		String[] words = w.getKeyword();
+		System.out.println(words.length);
 		//open results pop up
 		//set next question
-		new ResultsPopUp(transcript, prevQ).setVisible(true);
+		new ResultsPopUp(transcript, prevQ, value, words).setVisible(true);
 		
 	}
 	
