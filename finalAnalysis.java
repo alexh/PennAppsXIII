@@ -8,7 +8,7 @@ import com.ibm.watson.developer_cloud.personality_insights.v2.PersonalityInsight
 import com.ibm.watson.developer_cloud.personality_insights.v2.model.Profile;
 
 //
-public class FinalAnalysis {
+public class finalAnalysis {
 	String[] traits;
 	double[] traits_score;
 	String[] needs;
@@ -39,7 +39,7 @@ public class FinalAnalysis {
 	public void setNeeds_score(double[] needs_score) {
 		this.needs_score = needs_score;
 	}
-	public FinalAnalysis(String arg) {
+	public finalAnalysis(String arg) {
 		
 		// The name of the file to open.
         String fileName = arg;
@@ -118,11 +118,68 @@ public class FinalAnalysis {
 			nescore[i] = percent.getDouble("percentage");
 		}
 		
-		setTraits(analysis);
-		setTraits_score(anscore);
+		String[] topTraits = new String[3];
+		double[] topScore = new double[3];
+		int place1 = 0;
+		int place2 = 0;
+		int place3 = 0;
+		for (int i = 0; i < anscore.length; i++) {
+			if (anscore[i] > topScore[0]) {
+				topScore[2] = topScore[1];
+				place3 = place2;
+				topScore[1] = topScore[0];
+				place2 = place1;
+				topScore[0] = anscore[i];
+				place1 = i;
+				
+			}
+			else if (anscore[i] > topScore[1]) {
+				topScore[2] = topScore[1];
+				place3 = place2;
+				topScore[1] = anscore[i];
+				place2 = i;
+			}
+			else if (anscore[i] > topScore[2]) {
+				topScore[2] = anscore[i];
+				place3 = i;
+			}
+		}
+		topTraits[0] = analysis[place1];
+		topTraits[1] = analysis[place2];
+		topTraits[2] = analysis[place3];
 		
-		setNeeds(need);
-		setNeeds_score(nescore);
+		String[] topNeeds = new String[3];
+		double[] highScore = new double[3];
+		for (int i = 0; i < nescore.length; i++) {
+			if (nescore[i] > highScore[0]) {
+				highScore[2] = highScore[1];
+				place3 = place2;
+				highScore[1] = highScore[0];
+				place2 = place1;
+				highScore[0] = nescore[i];
+				place1 = i;
+			}
+			else if (nescore[i] > highScore[1]) {
+				highScore[2] = highScore[1];
+				place3 = place2;
+				highScore[1] = nescore[i];
+				place2 = i;
+			}
+			else if (nescore[i] > highScore[2]) {
+				highScore[2] = nescore[i];
+				place3 = i;
+			}
+		}
+		
+		topNeeds[0] = need[place1];
+		topNeeds[1] = need[place2];
+		topNeeds[2] = need[place3];
+		
+		setTraits(topNeeds);
+		setTraits_score(topScore);
+		
+		setNeeds(topNeeds);
+		setNeeds_score(highScore);
 		
 		
 		
@@ -130,8 +187,7 @@ public class FinalAnalysis {
 	}
 	public static void main(String[] args) {
 		
-		//FinalAnalysis test = new FinalAnalysis("readit.txt");
-		//System.out.println(test.traits[0]);
+		finalAnalysis test = new finalAnalysis("women.txt");
 		
 		
 	}
