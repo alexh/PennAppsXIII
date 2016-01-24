@@ -40,6 +40,7 @@ public class Counselor extends JFrame implements ActionListener {
 	
 
 	private JButton buttonRecord = new JButton();
+	private JButton checkResults = new JButton("Check Results");
 	private JLabel labelRecordTime = new JLabel("Record Time: 00:00:00");
 
 	private SoundRecordingUtil recorder = new SoundRecordingUtil();
@@ -108,7 +109,6 @@ public class Counselor extends JFrame implements ActionListener {
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		       
 			try {
 				PrintWriter writer = new PrintWriter(new File("name1.txt"));
 				  writer.print("");
@@ -150,8 +150,23 @@ public class Counselor extends JFrame implements ActionListener {
 		buttonRecord.setOpaque(false);
 		buttonRecord.setContentAreaFilled(false);
 		buttonRecord.setBorderPainted(false);
+		checkResults.addActionListener(new ActionListener(){
+	           @Override
+	           public void actionPerformed(ActionEvent event){
+	        	   FinalAnalysis fa1 = new FinalAnalysis("name1.txt");
+	        	   FinalAnalysis fa2 = new FinalAnalysis("name2.txt");
+	               //FinalResults fr = new FinalResults();
+	            //   fr.setVisible(true);
+	           }
+	        });
 		labelRecordTime.setFont(new Font("BiauKais", Font.BOLD, 14));
 		labelRecordTime.setForeground(Color.WHITE);
+		
+		checkResults.setOpaque(false);
+		checkResults.setContentAreaFilled(false);
+		checkResults.setBorderPainted(false);
+		checkResults.setForeground(Color.WHITE);
+		checkResults.setFont(new Font("BiauKais", Font.BOLD, 14));
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BorderLayout());
 		centerPanel.setOpaque(false);
@@ -170,7 +185,7 @@ public class Counselor extends JFrame implements ActionListener {
 		bottomPanel.setLayout(new BorderLayout());
 		bottomPanel.setOpaque(false);
 		JLabel test1 = new JLabel();
-		labelRecordTime.setPreferredSize(new Dimension(300,250));
+		labelRecordTime.setPreferredSize(new Dimension(300,200));
 		JLabel gapper = new JLabel();
 		gapper.setPreferredSize(new Dimension(130, 0));
 		JPanel bcPanel = new JPanel();
@@ -180,7 +195,14 @@ public class Counselor extends JFrame implements ActionListener {
 		fix.add(gapper);
 		fix.add(labelRecordTime);
 		
-		bcPanel.add(fix);
+		JPanel fix2 = new JPanel();
+		fix2.setOpaque(false);
+		RelativeLayout r = new RelativeLayout(RelativeLayout.Y_AXIS);
+		fix2.setLayout(r);
+		
+		fix2.add(fix);
+		fix2.add(checkResults);
+		bcPanel.add(fix2);
 		bottomPanel.add(bcPanel, BorderLayout.CENTER);
 		name1Label = new JLabel(name1);
 		 name2Label = new JLabel(name2);
@@ -231,7 +253,7 @@ public class Counselor extends JFrame implements ActionListener {
 				stopRecording();
 			}
 
-			}
+		}
 		}
 
 

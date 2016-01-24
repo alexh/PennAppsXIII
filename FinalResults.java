@@ -104,8 +104,8 @@ public class FinalResults extends JFrame {
 	}
 	public static void main(String[] args) {
 		
-		finalAnalysis man = new finalAnalysis("man.txt");
-		finalAnalysis women = new finalAnalysis("women.txt");
+		FinalAnalysis man = new FinalAnalysis("man.txt");
+		FinalAnalysis women = new FinalAnalysis("women.txt");
 		
 		String[] thiss = man.needs;
 
