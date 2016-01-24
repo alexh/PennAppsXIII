@@ -19,7 +19,7 @@ public class FinalResults extends JFrame {
 
 	public FinalResults(String text1, String text2, String name1, String name2) {
 		super("Results");
-		this.setTitle("Final Results");
+		this.setTitle("Results");
 		RelativeLayout r = new RelativeLayout(RelativeLayout.Y_AXIS);
 		setLayout(r);
 
