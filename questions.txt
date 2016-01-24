@@ -1,1 +1,5 @@
-String[] questions = new String[“Have you ever considered having an affair?”, “What Issues Are Most Important?”, “Do You Want a Divorce?”, "Are We Going Through a Bad Phase?", "How Do You Truly Feel About the Relationship?", "What Bothers You Most About Me?", "What Kind of Love Do You Feel?", "Do You Trust Me?", "Are You Satisfied With Our Intimacy?", "What Are the Reasons You Want to Work Things Out?", "Are There Any Past Conflicts We Should Resolve?", "Do you Feel You Can Communicate With Me?", "Do You Feel Accepted?", "How Do You See our Future?", "Have We Tried Everything?", "Are You Willing to Change to Make Improvements?",]
+String[] questions = new String[“Have you ever considered having an affair?”, “What Issues Are Most Important?”, “Do You Want a Divorce?”, "Are We Going Through a Bad Phase?", "How Do You Truly Feel About the Relationship?", "What Bothers You Most About Me?", "What Kind of Love Do You Feel?", "Do You Trust Me?", "Are You Satisfied With Our Intim
+acy?", "What Are the Reasons You Want to Work Things Out?", "Are There Any Past Conflic
+ts We Should Resolve?", "Do you Feel You Can Communicate With Me?", "Do You Feel Ac
+cepted?", "How Do You See our Future?", "Have We Tried Everything?", "Are You Willing to
+ Change to Make Improvements?",]

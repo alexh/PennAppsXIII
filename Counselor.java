@@ -108,7 +108,6 @@ public class Counselor extends JFrame implements ActionListener {
 		this.addWindowListener(new java.awt.event.WindowAdapter() {
 		    @Override
 		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-		       System.out.println("Thank you for using!");
 		       
 			try {
 				PrintWriter writer = new PrintWriter(new File("name1.txt"));
@@ -151,7 +150,7 @@ public class Counselor extends JFrame implements ActionListener {
 		buttonRecord.setOpaque(false);
 		buttonRecord.setContentAreaFilled(false);
 		buttonRecord.setBorderPainted(false);
-		labelRecordTime.setFont(new Font("BiauKais", Font.BOLD, 12));
+		labelRecordTime.setFont(new Font("BiauKais", Font.BOLD, 14));
 		labelRecordTime.setForeground(Color.WHITE);
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BorderLayout());
@@ -172,9 +171,16 @@ public class Counselor extends JFrame implements ActionListener {
 		bottomPanel.setOpaque(false);
 		JLabel test1 = new JLabel();
 		labelRecordTime.setPreferredSize(new Dimension(300,250));
+		JLabel gapper = new JLabel();
+		gapper.setPreferredSize(new Dimension(130, 0));
 		JPanel bcPanel = new JPanel();
 		bcPanel.setOpaque(false);
-		bcPanel.add(labelRecordTime);
+		JPanel fix = new JPanel();
+		fix.setOpaque(false);
+		fix.add(gapper);
+		fix.add(labelRecordTime);
+		
+		bcPanel.add(fix);
 		bottomPanel.add(bcPanel, BorderLayout.CENTER);
 		name1Label = new JLabel(name1);
 		 name2Label = new JLabel(name2);
@@ -223,7 +229,6 @@ public class Counselor extends JFrame implements ActionListener {
 				startRecording();
 			} else {
 				stopRecording();
-				setQuestion("Fetch New Question");
 			}
 
 			}
@@ -376,10 +381,11 @@ public class Counselor extends JFrame implements ActionListener {
 		Watson w = new Watson(transcript);
 		double value = w.getValue();
 		String[] words = w.getKeyword();
-		System.out.println(words.length);
 		//open results pop up
 		//set next question
-		new ResultsPopUp(transcript, prevQ, value, words).setVisible(true);
+		ResultsPopUp rpu = new ResultsPopUp(transcript, prevQ, value, words);
+		setQuestion(rpu.getNextQuestion());
+		rpu.setVisible(true);
 		
 	}
 	
