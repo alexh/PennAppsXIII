@@ -58,29 +58,29 @@ public class FinalResults extends JFrame {
 		double[] ragu = dude2.needs_score;
 		
 		
-		JLabel keywords = new JLabel(name1 + "needs...");
-		keywords.setFont(new Font("BiauKai", Font.PLAIN, 20));
+		JLabel keywords = new JLabel("What " + name1 + " may need:");
+		keywords.setFont(new Font("BiauKai", Font.BOLD, 30));
 		keywords.setForeground(Color.WHITE);
-		JLabel answer1 = new JLabel(args[0] + ": " + argu[0]);
+		JLabel answer1 = new JLabel((int)(100.0 *argu[0])+ "% chance "+ name1+ " needs " + args[0]);
 		answer1.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer1.setForeground(Color.WHITE);
-		JLabel answer2 = new JLabel(args[1] + ": " + argu[1]);
+		JLabel answer2 = new JLabel((int)(100.0 *argu[1])+ "% chance "+ name1+ " needs " + args[1]);
 		answer2.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer2.setForeground(Color.WHITE);
-		JLabel answer3 = new JLabel(args[2] + ": " + argu[2]);
+		JLabel answer3 = new JLabel((int)(100.0 *argu[2])+ "% chance "+ name1+ " needs " + args[2]);
 		answer3.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer3.setForeground(Color.WHITE);
 		
-		JLabel keywords2 = new JLabel(name2 + "needs...");
-		keywords2.setFont(new Font("BiauKai", Font.PLAIN, 20));
+		JLabel keywords2 = new JLabel("What " + name2 + " may need:");
+		keywords2.setFont(new Font("BiauKai", Font.BOLD, 30));
 		keywords2.setForeground(Color.WHITE);
-		JLabel answer4 = new JLabel(rags[0] + ": " + ragu[0]);
+		JLabel answer4 = new JLabel((int)(100.0 *ragu[0])+ "% chance "+ name2+ " needs " + rags[0]);
 		answer4.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer4.setForeground(Color.WHITE);
-		JLabel answer5 = new JLabel(rags[1] + ": " + ragu[1]);
+		JLabel answer5 = new JLabel((int)(100.0 *ragu[1])+ "% chance "+ name2+ " needs " + rags[1]);
 		answer5.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer5.setForeground(Color.WHITE);
-		JLabel answer6 = new JLabel(rags[2] + ": " + ragu[2]);
+		JLabel answer6 = new JLabel((int)(100.0 *ragu[2])+ "% chance "+ name2+ " needs " + rags[2]);
 		answer6.setFont(new Font("BiauKai", Font.PLAIN, 20));
 		answer6.setForeground(Color.WHITE);
 		
