@@ -1,10 +1,8 @@
 <<<<<<< HEAD
-# PennAppsXIII, foo
+# PennAppsXIII
 Created By:
 Alex Haynes
-Owain West
 Tristrum Tuttle
-William Brown
 =======
 # PennAppsXIII
 >>>>>>> origin/master
