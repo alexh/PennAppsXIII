@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 # PennAppsXIII
 Created By:
 Alex Haynes
 Tristrum Tuttle
-=======
-# PennAppsXIII
->>>>>>> origin/master
+
+Demo Video:
+https://youtu.be/fY9RVNJ9Alo
